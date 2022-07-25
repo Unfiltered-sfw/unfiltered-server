@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
+app.use(cors());
+
 const { data, comments } = require("./db");
 
 // Home route
@@ -38,4 +40,10 @@ app.get("/comments/:id", (req, res) => {
     comment,
   });
 });
+
+// Recieve data from client
+app.post("/", (req, res) => {
+  res.status(201).send("helo");
+});
+
 module.exports = app;
