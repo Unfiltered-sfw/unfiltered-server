@@ -19,6 +19,16 @@ app.get("/posts/:id", (req, res) => {
 });
 
 // Comment route
-app.get("/posts", (req, res) => res.send(data));
+app.get("/posts/:id/comments", (req, res) => {
+  const id = req.params.id;
+
+  const post = data.filter((post) => post["id"] == id);
+
+  //   const {comments} = post
+  const comments = post.comments;
+  console.log(comments);
+
+  res.send(comments);
+});
 
 module.exports = app;
