@@ -32,7 +32,7 @@ app.get("/comments", (req, res) => {
 app.get("/comments/:id", (req, res) => {
   const id = req.params.id;
 
-  const comment = data.filter((comment) => comment["id"] == id);
+  const comment = data.filter((comments) => comments["id"] = id);
 
   res.json({
     comment,
