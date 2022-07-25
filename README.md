@@ -13,8 +13,8 @@ The server side of our Unfiltered-SFW assigment
 - Run `npm test` to launch test suite.
 
 ## Changelog
-[x] created template files for server side .js
-[x] created package .json files and installed depenedencies
+- [x] created template files for server side .js
+- [x] created package .json files and installed depenedencies
 
 ### db.js
 - [x] created template data content
