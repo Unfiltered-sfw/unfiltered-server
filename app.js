@@ -8,7 +8,8 @@ const path = require("path");
 app.use(cors());
 app.use(express.json());
 
-const { data, comments } = require("./db");
+const data = require("./postsData");
+const comments = require("./commentsData");
 
 // Home route
 app.get("/", (req, res) => res.send("Welcome to the Unfiltered API!"));
@@ -53,10 +54,10 @@ app.post("/posts", async (req, res) => {
     return res.sendStatus(400);
   }
   try {
-    await fsPromises.writeFile(path.join(__dirname, "postData.js"), data);
-    await fsPromises.appendFile(path.join(__dirname, "postData.js"), "\n\n");
+    await fsPromises.writeFile(path.join(__dirname, "postsData.js"), data);
+    await fsPromises.appendFile(path.join(__dirname, "postsData.js"), "\n\n");
     await fsPromises.appendFile(
-      path.join(__dirname, "postData.js"),
+      path.join(__dirname, "postsData.js"),
       "module.exports = data;"
     );
 
