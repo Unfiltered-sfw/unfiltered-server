@@ -8,8 +8,8 @@ const path = require("path");
 app.use(cors());
 app.use(express.json());
 
-const data = require("./postsData");
-const comments = require("./commentsData");
+const data = require("./database/postsData");
+const comments = require("./database/commentsData");
 
 // GET
 // Home route
@@ -56,10 +56,16 @@ app.post("/posts", async (req, res) => {
     return res.sendStatus(400);
   }
   try {
-    await fsPromises.writeFile(path.join(__dirname, "postsData.js"), data);
-    await fsPromises.appendFile(path.join(__dirname, "postsData.js"), "\n\n");
+    await fsPromises.writeFile(
+      path.join(__dirname, "database", "postsData.js"),
+      data
+    );
     await fsPromises.appendFile(
-      path.join(__dirname, "postsData.js"),
+      path.join(__dirname, "database", "postsData.js"),
+      "\n\n"
+    );
+    await fsPromises.appendFile(
+      path.join(__dirname, "database", "postsData.js"),
       "module.exports = data;"
     );
 
@@ -80,15 +86,15 @@ app.post("/comments", async (req, res) => {
 
   try {
     await fsPromises.writeFile(
-      path.join(__dirname, "commentsData.js"),
+      path.join(__dirname, "database", "commentsData.js"),
       comments
     );
     await fsPromises.appendFile(
-      path.join(__dirname, "commentsData.js"),
+      path.join(__dirname, "database", "commentsData.js"),
       "\n\n"
     );
     await fsPromises.appendFile(
-      path.join(__dirname, "commentsData.js"),
+      path.join(__dirname, "database", "commentsData.js"),
       "module.exports = comments;"
     );
 
