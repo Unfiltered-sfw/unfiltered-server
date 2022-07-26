@@ -11,6 +11,12 @@ app.use(express.json());
 const data = require("./database/postsData");
 const comments = require("./database/commentsData");
 
+// TODOFIXME
+// 1. Change database to json
+// 2. Purge imports
+// 3. Use fsPromises.readFile()
+// 4. res.send(<json>)
+
 // GET
 // Home route
 app.get("/", (req, res) => res.send("Welcome to the Unfiltered API!"));
@@ -56,16 +62,21 @@ app.post("/posts", async (req, res) => {
     return res.sendStatus(400);
   }
   try {
+    // refactor line 66-79
     await fsPromises.writeFile(
-      path.join(__dirname, "database", "postsData.js"),
+      path.join(__dirname, "database", "postsDataTest.js"),
+      "const data = \n"
+    );
+    await fsPromises.appendFile(
+      path.join(__dirname, "database", "postsDataTest.js"),
       data
     );
     await fsPromises.appendFile(
-      path.join(__dirname, "database", "postsData.js"),
+      path.join(__dirname, "database", "postsDataTest.js"),
       "\n\n"
     );
     await fsPromises.appendFile(
-      path.join(__dirname, "database", "postsData.js"),
+      path.join(__dirname, "database", "postsDataTest.js"),
       "module.exports = data;"
     );
 
@@ -85,16 +96,21 @@ app.post("/comments", async (req, res) => {
   }
 
   try {
+    // refactor line 100-115
     await fsPromises.writeFile(
-      path.join(__dirname, "database", "commentsData.js"),
+      path.join(__dirname, "database", "commentsDataTest.js"),
+      "const comments = "
+    );
+    await fsPromises.appendFile(
+      path.join(__dirname, "database", "commentsDataTest.js"),
       comments
     );
     await fsPromises.appendFile(
-      path.join(__dirname, "database", "commentsData.js"),
+      path.join(__dirname, "database", "commentsDataTest.js"),
       "\n\n"
     );
     await fsPromises.appendFile(
-      path.join(__dirname, "database", "commentsData.js"),
+      path.join(__dirname, "database", "commentsDataTest.js"),
       "module.exports = comments;"
     );
 
