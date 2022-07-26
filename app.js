@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 const fs = require("fs");
 const fsPromises = require("fs").promises;
+const path = require("path");
 
 app.use(cors());
 app.use(express.json());
@@ -44,20 +45,51 @@ app.get("/comments/:id", (req, res) => {
   });
 });
 
-// Recieve data from client PROG
-app.post("/", (req, res) => {
-  const state = req.body.state;
+// Recieve posts from client PROG
+app.post("/posts", async (req, res) => {
+  const data = req.body;
 
-  // guard claus
-  if (!state) {
-    return res.sendStatus(400);
+  try {
+    res.status(201).send("Thankyou for your posts!");
+    console.log("Posts recieved!✅");
+  } catch (err) {
+    console.error(err);
   }
-
-  // split into posts + comments TODO
-
-  // save files
-
-  res.status(201).send("hello");
 });
+
+// Recieve comments from client
+app.post("/comments", async (req, res) => {
+  const comments = req.body;
+
+  try {
+    res.status(201).send("Thankyou for your comments!");
+    console.log("Comments recieved!✅");
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+// const state = JSON.stringify(req.body.state);
+
+//   // guard claus
+//   if (!state) {
+//     return res.sendStatus(400);
+//   }
+
+//   // split into posts + comments TODO
+
+//   try {
+//     // save files
+//     await fsPromises.writeFile(path.join(__dirname, "dbTest.js"), state);
+
+//     // Read incoming json
+//     // await fsPromises.readFile(path.join(__dirname, "dbTest.js"), "utf8");
+//     await fsPromises.rename(path.join(__dirname, "dbTest.js"), "db1.js");
+//     // await fsPromises.unlink(path.join(__dirname, "dbtest.json"));}
+
+//     res.status(201).send("hello");
+//   } catch (err) {
+//     console.log(err);
+//   }
 
 module.exports = app;
