@@ -11,6 +11,7 @@ app.use(express.json());
 const data = require("./postsData");
 const comments = require("./commentsData");
 
+// GET
 // Home route
 app.get("/", (req, res) => res.send("Welcome to the Unfiltered API!"));
 
@@ -46,7 +47,8 @@ app.get("/comments/:id", (req, res) => {
   });
 });
 
-// Recieve posts from client PROG
+// POST PROG
+// Recieve posts from client
 app.post("/posts", async (req, res) => {
   const data = JSON.stringify(req.body);
 
@@ -96,28 +98,5 @@ app.post("/comments", async (req, res) => {
     console.error(err);
   }
 });
-
-// const state = JSON.stringify(req.body.state);
-
-//   // guard claus
-//   if (!state) {
-//     return res.sendStatus(400);
-//   }
-
-//   // split into posts + comments TODO
-
-//   try {
-//     // save files
-//     await fsPromises.writeFile(path.join(__dirname, "dbTest.js"), state);
-
-//     // Read incoming json
-//     // await fsPromises.readFile(path.join(__dirname, "dbTest.js"), "utf8");
-//     await fsPromises.rename(path.join(__dirname, "dbTest.js"), "db1.js");
-//     // await fsPromises.unlink(path.join(__dirname, "dbtest.json"));}
-
-//     res.status(201).send("hello");
-//   } catch (err) {
-//     console.log(err);
-//   }
 
 module.exports = app;
