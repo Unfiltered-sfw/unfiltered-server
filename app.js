@@ -47,10 +47,14 @@ app.get("/comments/:id", (req, res) => {
 
 // Recieve posts from client PROG
 app.post("/posts", async (req, res) => {
-  const data = req.body;
+  const data = JSON.stringify(req.body);
 
+  if (!data) {
+    return res.sendStatus(400);
+  }
   try {
     res.status(201).send("Thankyou for your posts!");
+
     console.log("Posts recieved!✅");
   } catch (err) {
     console.error(err);
@@ -59,7 +63,11 @@ app.post("/posts", async (req, res) => {
 
 // Recieve comments from client
 app.post("/comments", async (req, res) => {
-  const comments = req.body;
+  const comments = JSON.stringify(req.body);
+
+  if (!comments) {
+    return res.sendStatus(400);
+  }
 
   try {
     res.status(201).send("Thankyou for your comments!");
