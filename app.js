@@ -11,7 +11,9 @@ app.use(express.json());
 const { data, comments } = require("./db");
 
 // Home route
-app.get("/", (req, res) => res.send("Welcome to the Unfiltered API!"));
+app.get("/", (req, res) => 
+res.send("Welcome to the Unfiltered API!")
+);
 
 // Posts route
 app.get("/posts", (req, res) => {
