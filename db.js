@@ -54,17 +54,17 @@ const comments = [
     email: "therealdtrump@hotmail.com",
     comments: [
       {
-        id: 0,
+        id: 3,
         content: `boo bland`,
         reaction: { heart: 0, like: 2, dislike: 5 },
       },
       {
-        id: 1,
+        id: 4,
         content: `how interesting, not 😒`,
         reaction: { heart: 0, like: 3, dislike: 6 },
       },
       {
-        id: 2,
+        id: 5,
         content: `Bet your life is fun`,
         reaction: { heart: 2, like: 5, dislike: 0 },
       },
@@ -76,12 +76,12 @@ const comments = [
     email: "j.smith@hotmail.com",
     comments: [
       {
-        id: 0,
+        id: 6,
         content: `aw don't be discouraged`,
         reaction: { heart: 4, like: 2, dislike: 0 },
       },
       {
-        id: 1,
+        id: 7,
         content: `You got this!`,
         reaction: { heart: 4, like: 3, dislike: 0 },
       },
@@ -93,17 +93,17 @@ const comments = [
     email: "grimes@gmail.com",
     comments: [
       {
-        id: 0,
+        id: 8,
         content: `F that guy, you can do better! Onwards and upwards`,
         reaction: { heart: 7, like: 5, dislike: 0 },
       },
       {
-        id: 1,
+        id: 9,
         content: `Forget about him, I'm here if you need someone to talk to 😏`,
         reaction: { heart: 2, like: 3, dislike: 6 },
       },
       {
-        id: 2,
+        id: 10,
         content: `Men suck anyway sis, you got this`,
         reaction: { heart: 8, like: 5, dislike: 3 },
       },
