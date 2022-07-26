@@ -53,8 +53,14 @@ app.post("/posts", async (req, res) => {
     return res.sendStatus(400);
   }
   try {
-    res.status(201).send("Thankyou for your posts!");
+    await fsPromises.writeFile(path.join(__dirname, "postData.js"), data);
+    await fsPromises.appendFile(path.join(__dirname, "postData.js"), "\n\n");
+    await fsPromises.appendFile(
+      path.join(__dirname, "postData.js"),
+      "module.exports = data;"
+    );
 
+    res.status(201).send("Thankyou for your posts!");
     console.log("Posts recieved!✅");
   } catch (err) {
     console.error(err);
@@ -70,6 +76,19 @@ app.post("/comments", async (req, res) => {
   }
 
   try {
+    await fsPromises.writeFile(
+      path.join(__dirname, "commentsData.js"),
+      comments
+    );
+    await fsPromises.appendFile(
+      path.join(__dirname, "commentsData.js"),
+      "\n\n"
+    );
+    await fsPromises.appendFile(
+      path.join(__dirname, "commentsData.js"),
+      "module.exports = comments;"
+    );
+
     res.status(201).send("Thankyou for your comments!");
     console.log("Comments recieved!✅");
   } catch (err) {
