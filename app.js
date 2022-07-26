@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 
 app.use(cors());
+app.use(express.json());
 
 const { data, comments } = require("./db");
 
@@ -41,9 +42,20 @@ app.get("/comments/:id", (req, res) => {
   });
 });
 
-// Recieve data from client
+// Recieve data from client PROG
 app.post("/", (req, res) => {
-  res.status(201).send("helo");
+  const state = req.body.state;
+
+  // guard claus
+  if (!state) {
+    return res.sendStatus(400);
+  }
+
+  // split into posts + comments TODO
+
+  // save files
+
+  res.status(201).send("hello");
 });
 
 module.exports = app;
