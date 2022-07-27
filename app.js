@@ -8,44 +8,38 @@ const path = require("path");
 app.use(cors());
 app.use(express.json());
 
-const { data, comments } = require("./db");
-
+// GET
 // Home route
-app.get("/", (req, res) => res.send("Welcome to the Unfiltered API!"));
+app.get("/", (req, res) => 
+res.send("Welcome to the Unfiltered API!")
+);
 
+callum/testing
 // Posts route
 app.get("/posts", (req, res) => {
   res.json({ data });
+
+// Posts route ✅
+app.get("/posts", async (req, res) => {
+  const posts = await fsPromises.readFile(
+    path.join(__dirname, "database", "postsData.json"),
+    "utf8"
+  );
+  res.send(posts);
+ 
 });
 
-// Individual Post
-app.get("/posts/:id", (req, res) => {
-  const id = req.params.id;
-
-  const post = data.filter((post) => post["id"] == id);
-
-  res.json({
-    post,
-  });
+// Comments route ✅
+app.get("/comments", async (req, res) => {
+  const comments = await fsPromises.readFile(
+    path.join(__dirname, "database", "commentsData.json"),
+    "utf8"
+  );
+  res.send(comments);
 });
 
-// Comments route
-app.get("/comments", (req, res) => {
-  res.json({ comments });
-});
-
-// Individual post
-app.get("/comments/:id", (req, res) => {
-  const id = req.params.id;
-
-  const comment = data.filter((comments) => comments["id"] == id);
-
-  res.json({
-    comment,
-  });
-});
-
-// Recieve posts from client PROG
+// POST
+// Recieve posts from client✅
 app.post("/posts", async (req, res) => {
   const data = JSON.stringify(req.body);
 
@@ -53,6 +47,11 @@ app.post("/posts", async (req, res) => {
     return res.sendStatus(400);
   }
   try {
+    await fsPromises.writeFile(
+      path.join(__dirname, "database", "postsData.json"),
+      data
+    );
+
     res.status(201).send("Thankyou for your posts!");
 
     console.log("Posts recieved!✅");
@@ -61,7 +60,7 @@ app.post("/posts", async (req, res) => {
   }
 });
 
-// Recieve comments from client
+// Recieve comments from client ✅
 app.post("/comments", async (req, res) => {
   const comments = JSON.stringify(req.body);
 
@@ -70,34 +69,16 @@ app.post("/comments", async (req, res) => {
   }
 
   try {
+    await fsPromises.writeFile(
+      path.join(__dirname, "database", "commentsData.js"),
+      comments
+    );
+
     res.status(201).send("Thankyou for your comments!");
     console.log("Comments recieved!✅");
   } catch (err) {
     console.error(err);
   }
 });
-
-// const state = JSON.stringify(req.body.state);
-
-//   // guard claus
-//   if (!state) {
-//     return res.sendStatus(400);
-//   }
-
-//   // split into posts + comments TODO
-
-//   try {
-//     // save files
-//     await fsPromises.writeFile(path.join(__dirname, "dbTest.js"), state);
-
-//     // Read incoming json
-//     // await fsPromises.readFile(path.join(__dirname, "dbTest.js"), "utf8");
-//     await fsPromises.rename(path.join(__dirname, "dbTest.js"), "db1.js");
-//     // await fsPromises.unlink(path.join(__dirname, "dbtest.json"));}
-
-//     res.status(201).send("hello");
-//   } catch (err) {
-//     console.log(err);
-//   }
 
 module.exports = app;

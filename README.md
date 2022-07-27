@@ -27,4 +27,7 @@ The server side of our Unfiltered-SFW assigment
 - to be updated
 
 ## Wins and Challenges
-- to be updated 
+[] Aim for minimum 60% test coverage (In future projects this will be enforced with an aim for 80%)
+[] Your website should be deployed (You could use eg. Netlify for client, Heroku for server)
+[] You may bring in some node libraries for specialised behaviour eg. dayjs but no large front end frameworks such as React.
+[] Your website should not have a database connected, instead any data sent and stored in your backend should be saved within .json files.
