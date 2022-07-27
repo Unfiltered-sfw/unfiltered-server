@@ -10,14 +10,7 @@ app.use(express.json());
 
 // GET
 // Home route
-app.get("/", (req, res) => 
-res.send("Welcome to the Unfiltered API!")
-);
-
-callum/testing
-// Posts route
-app.get("/posts", (req, res) => {
-  res.json({ data });
+app.get("/", (req, res) => res.send("Welcome to the Unfiltered API!"));
 
 // Posts route ✅
 app.get("/posts", async (req, res) => {
@@ -26,7 +19,6 @@ app.get("/posts", async (req, res) => {
     "utf8"
   );
   res.send(posts);
- 
 });
 
 // Comments route ✅
