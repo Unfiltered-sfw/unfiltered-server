@@ -61,7 +61,7 @@ app.post("/comments", async (req, res) => {
 
   try {
     await fsPromises.writeFile(
-      path.join(__dirname, "database", "commentsData.js"),
+      path.join(__dirname, "database", "commentsData.json"),
       comments
     );
 
