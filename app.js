@@ -8,49 +8,26 @@ const path = require("path");
 app.use(cors());
 app.use(express.json());
 
-const data = require("./database/postsData");
-const comments = require("./database/commentsData");
-
-// TODOFIXME
-// 1. Change database to json
-// 2. Purge imports
-// 3. Use fsPromises.readFile()
-// 4. res.send(<json>)
-
 // GET
 // Home route
 app.get("/", (req, res) => res.send("Welcome to the Unfiltered API!"));
 
-// Posts route
-app.get("/posts", (req, res) => {
-  res.json({ data });
+// Posts route ✅
+app.get("/posts", async (req, res) => {
+  const posts = await fsPromises.readFile(
+    path.join(__dirname, "database", "postsData.json"),
+    "utf8"
+  );
+  res.send(posts);
 });
 
-// Individual Post
-app.get("/posts/:id", (req, res) => {
-  const id = req.params.id;
-
-  const post = data.filter((post) => post["id"] == id);
-
-  res.json({
-    post,
-  });
-});
-
-// Comments route
-app.get("/comments", (req, res) => {
-  res.json({ comments });
-});
-
-// Individual post
-app.get("/comments/:id", (req, res) => {
-  const id = req.params.id;
-
-  const comment = data.filter((comments) => comments["id"] == id);
-
-  res.json({
-    comment,
-  });
+// Comments route ✅
+app.get("/comments", async (req, res) => {
+  const comments = await fsPromises.readFile(
+    path.join(__dirname, "database", "commentsData.json"),
+    "utf8"
+  );
+  res.send(comments);
 });
 
 // POST PROG
