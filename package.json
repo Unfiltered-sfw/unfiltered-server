@@ -1,7 +1,7 @@
 {
   "name": "unfiltered-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "The server side of our Unfiltered-SFW assigment",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

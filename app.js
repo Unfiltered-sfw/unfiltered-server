@@ -14,6 +14,11 @@ app.get("/", (req, res) =>
 res.send("Welcome to the Unfiltered API!")
 );
 
+callum/testing
+// Posts route
+app.get("/posts", (req, res) => {
+  res.json({ data });
+
 // Posts route ✅
 app.get("/posts", async (req, res) => {
   const posts = await fsPromises.readFile(
@@ -21,6 +26,7 @@ app.get("/posts", async (req, res) => {
     "utf8"
   );
   res.send(posts);
+ 
 });
 
 // Comments route ✅
