@@ -30,8 +30,8 @@ app.get("/comments", async (req, res) => {
   res.send(comments);
 });
 
-// POST PROG
-// Recieve posts from client
+// POST
+// Recieve posts from client✅
 app.post("/posts", async (req, res) => {
   const data = JSON.stringify(req.body);
 
@@ -39,22 +39,9 @@ app.post("/posts", async (req, res) => {
     return res.sendStatus(400);
   }
   try {
-    // refactor line 66-79
     await fsPromises.writeFile(
-      path.join(__dirname, "database", "postsDataTest.js"),
-      "const data = \n"
-    );
-    await fsPromises.appendFile(
-      path.join(__dirname, "database", "postsDataTest.js"),
+      path.join(__dirname, "database", "postsData.json"),
       data
-    );
-    await fsPromises.appendFile(
-      path.join(__dirname, "database", "postsDataTest.js"),
-      "\n\n"
-    );
-    await fsPromises.appendFile(
-      path.join(__dirname, "database", "postsDataTest.js"),
-      "module.exports = data;"
     );
 
     res.status(201).send("Thankyou for your posts!");
@@ -64,7 +51,7 @@ app.post("/posts", async (req, res) => {
   }
 });
 
-// Recieve comments from client
+// Recieve comments from client ✅
 app.post("/comments", async (req, res) => {
   const comments = JSON.stringify(req.body);
 
@@ -73,22 +60,9 @@ app.post("/comments", async (req, res) => {
   }
 
   try {
-    // refactor line 100-115
     await fsPromises.writeFile(
-      path.join(__dirname, "database", "commentsDataTest.js"),
-      "const comments = "
-    );
-    await fsPromises.appendFile(
-      path.join(__dirname, "database", "commentsDataTest.js"),
+      path.join(__dirname, "database", "commentsData.js"),
       comments
-    );
-    await fsPromises.appendFile(
-      path.join(__dirname, "database", "commentsDataTest.js"),
-      "\n\n"
-    );
-    await fsPromises.appendFile(
-      path.join(__dirname, "database", "commentsDataTest.js"),
-      "module.exports = comments;"
     );
 
     res.status(201).send("Thankyou for your comments!");
