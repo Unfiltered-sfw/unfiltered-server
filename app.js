@@ -1,10 +1,11 @@
+// Imports
 const express = require("express");
-const app = express();
 const cors = require("cors");
-const fs = require("fs");
 const fsPromises = require("fs").promises;
 const path = require("path");
 
+// Apps
+const app = express();
 app.use(cors());
 app.use(express.json());
 
