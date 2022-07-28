@@ -1,10 +1,11 @@
+// Imports
 const express = require("express");
-const app = express();
 const cors = require("cors");
-const fs = require("fs");
 const fsPromises = require("fs").promises;
 const path = require("path");
 
+// Apps
+const app = express();
 app.use(cors());
 app.use(express.json());
 
@@ -12,6 +13,11 @@ app.use(express.json());
 // Home route
 app.get("/", (req, res) => res.send("Welcome to the Unfiltered API!"));
 
+// Set content-type in header
+app.use(function (req, res, next) {
+  res.setHeader("Content-Type", "application/json");
+  next();
+});
 // Posts route ✅
 app.get("/posts", async (req, res) => {
   const posts = await fsPromises.readFile(
